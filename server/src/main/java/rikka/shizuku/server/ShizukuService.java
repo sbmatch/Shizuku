@@ -44,6 +44,7 @@ import kotlin.collections.ArraysKt;
 import moe.shizuku.api.BinderContainer;
 import moe.shizuku.common.util.BuildUtils;
 import moe.shizuku.common.util.OsUtils;
+import moe.shizuku.server.IRemoteCallback;
 import moe.shizuku.server.IShizukuApplication;
 import rikka.hidden.compat.ActivityManagerApis;
 import rikka.hidden.compat.DeviceIdleControllerApis;
@@ -417,6 +418,13 @@ public class ShizukuService extends Service<ShizukuUserServiceManager, ShizukuCl
     @Override
     public IBinder getSystemService(String name) throws RemoteException {
         return ServiceManager.getService(name);
+    }
+
+    @Override
+    public void test(String text, IRemoteCallback callback) throws RemoteException {
+        Bundle bundle = new Bundle();
+        bundle.putString("test.key", text);
+        callback.sendResult(bundle);
     }
 
     private void onPermissionRevoked(String packageName) {
