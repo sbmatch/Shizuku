@@ -420,13 +420,6 @@ public class ShizukuService extends Service<ShizukuUserServiceManager, ShizukuCl
         return ServiceManager.getService(name);
     }
 
-    @Override
-    public void test(String text, IRemoteCallback callback) throws RemoteException {
-        Bundle bundle = new Bundle();
-        bundle.putString("test.key", text);
-        callback.sendResult(bundle);
-    }
-
     private void onPermissionRevoked(String packageName) {
         // TODO add runtime permission listener
         getUserServiceManager().removeUserServicesForPackage(packageName);
